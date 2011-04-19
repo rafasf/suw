@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.Mime;
 using SUW.Extensions;
 
 namespace SUW.App
 {
     class Program
     {
-        private const string _folderToSearch = ".svn";
+        private const string FolderToSearch = ".svn";
 
         static void Main(string[] args)
         {
@@ -48,7 +47,7 @@ namespace SUW.App
 
             new DirectoryInfo(parameters[ParameterName.RootDir])
                 .GetDirectories()
-                .FindFirstFor(_folderToSearch)
+                .FindFirstFor(FolderToSearch)
                 .CreateShortcut(parameters[ParameterName.ShortcutDir]);
         }
 
@@ -62,7 +61,7 @@ namespace SUW.App
 
             var svnDirectories = new DirectoryInfo(parameters[ParameterName.RootDir])
                 .GetDirectories()
-                .FindFirstFor(_folderToSearch);
+                .FindFirstFor(FolderToSearch);
 
             tortoiseHandler.Update(svnDirectories);
         }

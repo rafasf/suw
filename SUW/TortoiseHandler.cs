@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Microsoft.Win32;
+using SUW.Extensions;
 
 namespace SUW
 {
@@ -47,10 +48,10 @@ namespace SUW
         {
             var directoriesToUpdate = string.Join("*", svnDirectories.Select(d => d.FullName).ToArray());
 
-            ExecuteCmd(CreateCommandLine("update", directoriesToUpdate));
+            ExecuteTortoise(CreateCommandLine("update", directoriesToUpdate));
         }
 
-        private void ExecuteCmd(string arguments)
+        private void ExecuteTortoise(string arguments)
         {
             var startInfo = new ProcessStartInfo
                                 {
