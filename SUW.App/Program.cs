@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.Mime;
 using SUW.Extensions;
 
 namespace SUW.App
@@ -11,9 +12,17 @@ namespace SUW.App
 
         static void Main(string[] args)
         {
-            if (args.Length <= 1) 
+            if (args.Length <= 1)
+            {
                 ShowHelp();
+                return;
+            }
 
+            Execute(args);
+        }
+
+        private static void Execute(string[] args)
+        {
             try
             {
                 var parser = new InputParser(args);
