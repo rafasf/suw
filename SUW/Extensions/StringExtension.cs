@@ -11,5 +11,10 @@ namespace SUW.Extensions
 
             return Regex.Replace(stringToClean.Trim(), @"\s+", " ");
         }
+
+        public static string WithQuotes(this string @string)
+        {
+            return string.Format("\"{0}\"", @string);
+        }
     }
 }

@@ -11,5 +11,11 @@ namespace SUW.Tests
         {
             Assert.AreEqual("this is a clean string", " this  is a  clean string   ".WithoutExtraSpaces());
         }
+
+        [Test]
+        public void ShouldSurroundStringWithQuotes()
+        {
+            Assert.AreEqual("\"Text here\"", "Text here".WithQuotes());
+        }
     }
 }
