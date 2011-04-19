@@ -13,7 +13,7 @@ namespace SUW
             get { return _parameters; }
         }
 
-        public InputParser(string parameters)
+        public InputParser(string[] parameters)
         {
             _parameters = new Dictionary<ParameterName, string>();
 
@@ -23,12 +23,10 @@ namespace SUW
                 throw new ArgumentException("You should gimme more than one parameter.");
         }
 
-        private void CreateNamedParameters(string flatParameters)
+        private void CreateNamedParameters(string[] parameters)
         {
-            var splitParameters = flatParameters.WithoutExtraSpaces().Split(' ');
-
-            for (int i = 0; i < splitParameters.Length; i++)
-                _parameters.Add(ParameterNameFor(i), splitParameters[i] ?? "");
+            for (int i = 0; i < parameters.Length; i++)
+                _parameters.Add(ParameterNameFor(i), parameters[i].WithoutExtraSpaces() ?? string.Empty);
         }
 
         private ParameterName ParameterNameFor(int index)

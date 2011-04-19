@@ -9,38 +9,48 @@ namespace SUW.Tests
         [Test]
         public void ShouldHaveThreeParameters()
         {
-            var parser = new InputParser(@"-c C:\RootDir C:\Shortcuts");
+            var parameters = new[] {"-c", @"C:\RootDir", @"C:\Shortcuts"};
+            var parser = new InputParser(parameters);
+
             Assert.AreEqual(3, parser.Parameters.Count);
         }
 
         [Test]
         public void ShouldHaveTwoParameters()
         {
-            var parser = new InputParser(@"-c C:\RootDir");
+            var parameters = new[] {"-c", @"C:\RootDir"};
+            var parser = new InputParser(parameters);
+
             Assert.AreEqual(2, parser.Parameters.Count);
         }
 
         [Test]
         public void ShouldAcceptDirectoryWithSpace()
         {
-            var parser = new InputParser(@"-u C:\Root Dir C:\Shortcut");
-        }
+            var parameters = new[] {"-u", @"C:\Root Dir", @"C:\Shortcut"};
+            var parser = new InputParser(parameters);
+
+            Assert.AreEqual("-u", parser.Parameters[ParameterName.Operation]);
+            Assert.AreEqual(@"C:\Root Dir", parser.Parameters[ParameterName.RootDir]);
+            Assert.AreEqual(@"C:\Shortcut", parser.Parameters[ParameterName.ShortcutDir]);
+     } 
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
         public void ShouldNotAcceptOneParameter()
         {
-            new InputParser(@"-c");
+            new InputParser(new[] {"-c"});
         }
 
         [Test]
         public void ShouldMapParametersCorrectly()
         {
-            var parser = new InputParser(@"-c C:\RootDir C:\Shortcurts");
+            var parameters = new[] { "-u", @"C:\RootDir", @"C:\Shortcuts" };
+            var parser = new InputParser(parameters);
 
-            Assert.AreEqual("-c", parser.Parameters[ParameterName.Operation]);
+            Assert.AreEqual("-u", parser.Parameters[ParameterName.Operation]);
             Assert.AreEqual(@"C:\RootDir", parser.Parameters[ParameterName.RootDir]);
-            Assert.AreEqual(@"C:\Shortcurts", parser.Parameters[ParameterName.ShortcutDir]);
+            Assert.AreEqual(@"C:\Shortcuts", parser.Parameters[ParameterName.ShortcutDir]);
         }
     }
 }
