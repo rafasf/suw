@@ -11,12 +11,12 @@ namespace SUW.App
 
         static void Main(string[] args)
         {
-            if (args.Length <= 1)
+            if (args.Length <= 1) 
                 ShowHelp();
 
             try
             {
-                var parser = new InputParser(string.Join(" ", args));
+                var parser = new InputParser(args);
 
                 if (parser.Parameters[ParameterName.Operation].Equals("-c"))
                     CreateShortcuts(parser.Parameters);
@@ -73,10 +73,10 @@ namespace SUW.App
         {
             Console.WriteLine("Hey! Probably you did something unexpected so here go some guidelines.");
             Console.WriteLine("If you want to create shortcuts for the folder that have .svn (starting from a root dir)");
-            Console.WriteLine("\tDirFinder -c <your-root-dir> <dir-to-create-the-shortcuts>");
+            Console.WriteLine("\tsuw -c <your-root-dir> <dir-to-create-the-shortcuts>");
             Console.WriteLine("");
             Console.WriteLine("If you want to update");
-            Console.WriteLine("\tDirFinder -u <your-root-dir>");
+            Console.WriteLine("\tsuw -u <your-root-dir>");
             Console.WriteLine("");
             Console.WriteLine("That's everything I can offer.");
         }
