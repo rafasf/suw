@@ -47,7 +47,7 @@ namespace SUW.App
 
             new DirectoryInfo(parameters[ParameterName.RootDir])
                 .GetDirectories()
-                .FindFirstFor(FolderToSearch)
+                .FindFirstLevelContaining(FolderToSearch)
                 .CreateShortcut(parameters[ParameterName.ShortcutDir]);
         }
 
@@ -56,12 +56,12 @@ namespace SUW.App
             CheckDirectoryExistence(parameters[ParameterName.RootDir], "root");
 
             var tortoiseHandler = new TortoiseHandler();
-            if (!tortoiseHandler.SearchInRegistry())
+            if (!tortoiseHandler.IsInRegistry())
                 throw new InvalidOperationException("TortoiseSVN wasn't found.");
 
             var svnDirectories = new DirectoryInfo(parameters[ParameterName.RootDir])
                 .GetDirectories()
-                .FindFirstFor(FolderToSearch);
+                .FindFirstLevelContaining(FolderToSearch);
 
             tortoiseHandler.Update(svnDirectories);
         }

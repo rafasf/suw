@@ -7,14 +7,14 @@ namespace SUW.Extensions
 {
     public static class DirectoryExtension
     {
-        public static IEnumerable<DirectoryInfo> FindFirstFor(this IEnumerable<DirectoryInfo> directories, string folder)
+        public static IEnumerable<DirectoryInfo> FindFirstLevelContaining(this IEnumerable<DirectoryInfo> directories, string folder)
         {
             foreach (var directory in directories)
             {
                 if (DirExists(folder, directory))
                     yield return directory;
                 else
-                    foreach (var innerDir in directory.GetDirectories().FindFirstFor(folder))
+                    foreach (var innerDir in directory.GetDirectories().FindFirstLevelContaining(folder))
                         yield return innerDir;
             }
         }

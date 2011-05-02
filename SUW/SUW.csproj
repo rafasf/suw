@@ -122,6 +122,7 @@
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
+      <Private>True</Private>
     </COMReference>
   </ItemGroup>
   <ItemGroup />

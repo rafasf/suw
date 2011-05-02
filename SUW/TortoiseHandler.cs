@@ -3,7 +3,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Microsoft.Win32;
-using SUW.Extensions;
 
 namespace SUW
 {
@@ -34,12 +33,12 @@ namespace SUW
             return subKeyDisplayName != null && subKeyDisplayName.ToString().Contains(_tortoise);
         }
 
-        private string CreateCommandLine(string command, string path)
+        private string WithCommandLine(string command, string path)
         {
             return string.Format("/command:{0} /path:{1}", command, path);
         }
 
-        public bool SearchInRegistry()
+        public bool IsInRegistry()
         {
             return _registryKey.GetSubKeyNames().Where(HasTortoise).Count() > 0;
         }
@@ -48,7 +47,7 @@ namespace SUW
         {
             var directoriesToUpdate = string.Join("*", svnDirectories.Select(d => d.FullName).ToArray());
 
-            ExecuteTortoise(CreateCommandLine("update", directoriesToUpdate));
+            ExecuteTortoise(WithCommandLine("update", directoriesToUpdate));
         }
 
         private void ExecuteTortoise(string arguments)
